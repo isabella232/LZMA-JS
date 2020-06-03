@@ -24,14 +24,14 @@
 })(function () {
     
     const LZMA = function (lzma_path) {
-        var action_compress   = 1,
-            action_decompress = 2,
-            action_progress   = 3,
+        var action_compress   = 1;
+        var action_decompress = 2;
+        var action_progress   = 3;
+        
+        var callback_obj = {};
             
-            callback_obj = {},
-            
-            ///NOTE: Node.js needs something like "./" or "../" at the beginning.
-            lzma_worker = new Worker(lzma_path || "./lzma_worker-min.js");
+        ///NOTE: Node.js needs something like "./" or "../" at the beginning.
+        var lzma_worker = new Worker(lzma_path || "./lzma_worker-min.js");
         
         lzma_worker.onmessage = function (e) {
             if (e.data.action === action_progress) {
